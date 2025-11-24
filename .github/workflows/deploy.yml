@@ -38,8 +38,8 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          docker build -t denilsonbonatti/gitlab-cicd-node:1.0 .
-          docker push denilsonbonatti/gitlab-cicd-node:1.0
+          docker build -t gcossi/gitlab-cicd-node:1.0 .
+          docker push gcossi/gitlab-cicd-node:1.0
 
   deploy_dev:
     needs: build_images
@@ -47,4 +47,4 @@ jobs:
     steps:
       - name: Deploy to Dev
         run: |
-          docker run -d --name nodeapp -p 3000:3000 denilsonbonatti/gitlab-cicd-node:1.0
+          docker run -d --name nodeapp -p 3000:3000 gcossi/gitlab-cicd-node:1.0
