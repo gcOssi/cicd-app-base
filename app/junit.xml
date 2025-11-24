@@ -1,21 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="3" failures="1" errors="0" time="0.486">
-  <testsuite name="undefined" errors="0" failures="1" skipped="0" timestamp="2025-11-24T18:30:52" time="0.213" tests="3">
+<testsuites name="jest tests" tests="3" failures="0" errors="0" time="0.411">
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2025-11-24T18:34:10" time="0.131" tests="3">
     <testcase classname=" main index.html file exists" name=" main index.html file exists" time="0.001">
     </testcase>
     <testcase classname=" Dockerfile exists" name=" Dockerfile exists" time="0">
     </testcase>
-    <testcase classname=" .gitignore file exists" name=" .gitignore file exists" time="0.001">
-      <failure>Error: expect(received).toBeTruthy()
-
-Received: false
-    at Object.&lt;anonymous&gt; (/Users/gonzalocabrerabou/Documents/GitHub/cicd-app-base/app/server.test.js:16:35)
-    at Object.asyncJestTest (/Users/gonzalocabrerabou/Documents/GitHub/cicd-app-base/app/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /Users/gonzalocabrerabou/Documents/GitHub/cicd-app-base/app/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/Users/gonzalocabrerabou/Documents/GitHub/cicd-app-base/app/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /Users/gonzalocabrerabou/Documents/GitHub/cicd-app-base/app/node_modules/jest-jasmine2/build/queueRunner.js:75:41
-    at processTicksAndRejections (node:internal/process/task_queues:105:5)</failure>
+    <testcase classname=" .gitignore file exists" name=" .gitignore file exists" time="0">
     </testcase>
   </testsuite>
 </testsuites>
