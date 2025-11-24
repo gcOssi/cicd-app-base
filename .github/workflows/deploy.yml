@@ -41,10 +41,11 @@ jobs:
           docker build -t gcossi/gitlab-cicd-node:1.0 .
           docker push gcossi/gitlab-cicd-node:1.0
 
-  deploy_dev:
-    needs: build_images
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to Dev
-        run: |
-          docker run -d --name nodeapp -p 3000:3000 gcossi/gitlab-cicd-node:1.0
+deploy_dev:
+  stage: deploy
+  needs:
+    - build_images
+  before_script:
+    - chmod 400 $SSH_KEY
+  script:
+    - ssh -o StrictHostKeyChecking=no -i $SSH_KEY gcp@34.138.12.32 "sudo rm * -Rf sudo git clone --branch Kubernetes https://github.com/gcOssi/cicd-app-base.git && cd cicd-app-base && kubectl -f deployment.yml"
