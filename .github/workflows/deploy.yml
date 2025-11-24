@@ -24,28 +24,27 @@ jobs:
         run: cd app && npm test
 
   build_images:
-    stage: build
-    needs:
-      - test
-    image: docker:20.10.16
-    services:
-      - docker:20.10.16-dind
-    
-    variables:
-      DOCKER_TLS_CERTDIR: "/certs"
-    
-    before_script:
-      - docker login -u $REGISTRY_USER -p $REGISTRY_PASS
-    
-    script:
-      - docker build -t denilsonbonatti/gitlab-cicd-node:1.0 .
-      - docker push denilsonbonatti/gitlab-cicd-node:1.0
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.REGISTRY_USER }}
+          password: ${{ secrets.REGISTRY_PASS }}
+
+      - name: Build and push Docker image
+        run: |
+          docker build -t denilsonbonatti/gitlab-cicd-node:1.0 .
+          docker push denilsonbonatti/gitlab-cicd-node:1.0
 
   deploy_dev:
-    stage: deploy
-    needs:
-      - build_images
-    tags:
-      - gcp
-    script:
-      - docker run -d --name nodeapp -p 3000:3000 denilsonbonatti/gitlab-cicd-node:1.0
+    needs: build_images
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to Dev
+        run: |
+          docker run -d --name nodeapp -p 3000:3000 denilsonbonatti/gitlab-cicd-node:1.0
